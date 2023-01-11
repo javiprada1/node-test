@@ -10,14 +10,10 @@ app.set('view engine', 'ejs');
 //Middleware
 app.use(express.static(__dirname+'/public'));
 
-//Peticiones básicas HTTP
-app.get('/', (req, res) => {
-    res.render("index", {titulo:"mi titulo dinámico"})
-  })
-  app.get('/contacto', (req, res) => {
-      res.render("contacto", {tituloContacto:"Estamos en contacto de manera dinámica"})
-  })
-  
+//Llamadas a las rutas
+app.use('/', require('./router/rutas'))
+app.use('/pokemon', require('./router/pokemon'))
+
 //Error controller
 app.use((req, res) => {
     res.status(404).render("404",{
